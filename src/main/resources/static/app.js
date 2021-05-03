@@ -102,7 +102,7 @@ $(function () {
     });
     $("#start").click(function () {
         $.ajax({
-                url: "http://localhost:9000/start",
+                url: "http://localhost:8080/start",
                 type: "Post",
                 success: function(restul){
                     console.log("ok")
@@ -112,7 +112,7 @@ $(function () {
     });
     $("#restart").click(function () {
         $.ajax({
-                url: "http://localhost:9000/restart",
+                url: "http://localhost:8080/restart",
                 type: "Post",
                 success: function(restul){
                     console.log("ok")
@@ -122,7 +122,7 @@ $(function () {
     });
     $("#stop").click(function () {
         $.ajax({
-                url: "http://localhost:9000/stop",
+                url: "http://localhost:8080/stop",
                 type: "Post",
                 success: function(restul){
                     console.log("ok")
@@ -132,7 +132,7 @@ $(function () {
     });
     $("#pause").click(function () {
         $.ajax({
-                url: "http://localhost:9000/pause",
+                url: "http://localhost:8080/pause",
                 type: "Post",
                 success: function(restul){
                     console.log("ok")

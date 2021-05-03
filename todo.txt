@@ -1,0 +1,80 @@
+Simulam o masa de fussball - virtual
+Ne conectam la un lobby
+gasim utilizatorii conectati
+alegem un utilizator conectat si pornim un meci - un singur meci activ in acelasi timp
+vedem in timp real evolutia meciului
+un admin vede o lista cu toate meciurile
+un utilizator normal vede doar meciurile lui
+avem status pe masa de fussball ( cate goluri a dat fiecare parte), sau daca masa este ocupata
+
+
+1. web app
+- websockets pentru afisare informatii
+- start match - un bot
+- goal event
+- stop event
+- informatii in timp real despre match
+    - punem mesage pe un topic de ws  legate de statusul meciului / schimbarile de scor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- chat-service - websocket
+conectare la lobby (websocket)
+alegere adversar din lista de oameni conectati
+pornire meci - un meci tine pana primul jucator ajunge la 10 goluri sau 1 minut
+/user - role user
+/user/{username}
+
+- match-service - basic auth / JWT / mqtt
+API JWT - expunere lista cu toate meciurile jucate de toti jucatorii - user ADMIn
+API JWT - expunere lista cu toate meciurile jucate de jucatorul curent - user normal
+salvarea meciurilor si deteliile lor in memory pentru a le putea scoate apoi in API
+raportare meci  finalizat si castigator
+API basic auth pentru pornire meciuri
+
+/match_list - user normal
+/match_list/{username} - user admin
+
+
+- sensor-1 - mqtt / JWT
+cron 1
+- random de boolean - true - score goal
+- random de boolean - false - nothing
+
+
+senzori care trimit goluri pe mqtt
+API care sa expuna cate goluri s-au dat in serviciu. acest API trebuie fie apelat cu JWT si poate fi apelat de ADMIN
+JWT API care sa spuna daca senzorul este pornit - admin
+/status
+
+
