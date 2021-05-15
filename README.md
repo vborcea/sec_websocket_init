@@ -1,2 +1,2 @@
-// mosquitto_sub -h 'm23.cloudmqtt.com' -p 11342 -u 'gtbciztk' -P 'i7gBalNmd3OV' -v -t '/match/table1/start'
-// mosquitto_pub -h 'm23.cloudmqtt.com' -p 11342 -u 'gtbciztk' -P 'i7gBalNmd3OV' -t '/match/table1/start' -m "salut"
+// mosquitto_sub -h 'localhost' -p 1883  -v -t '/match/table1/start'
+// mosquitto_pub -h 'localhost' -p 1883  -t '/match/table1/start' -m "salut"

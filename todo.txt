@@ -1,34 +1,44 @@
+1.
+Implementam o functionalitate prin care un utlizator se poate autentifica OAUTH in 2 pasi cu username si un cod generat random.
+In primul pas utlizatorul introduce email-ul apoi primeste un cod generat random.
+Apoi cu parola si cu codul generat utilizatorul se poate autentifica in sistem
+Codul generat are perioada de valabilitate de 1 minut
+Tokenul OAUTH generat trebuie foloseasca algoritmul RSA si alias-ul tokenului trebuie sa fie "workshop"
+
+2.
+Implementam o pagina web care stabileste conexiune websocket cu o aplicatie backend
+Pagina de html trebuie protejata cu basic auth
+
+3.
+Pe aplicatia dezvoltata la punctul 2 continuam exercitiul 3
 Simulam o masa de fussball - virtual
-Ne conectam la un lobby
-gasim utilizatorii conectati
-alegem un utilizator conectat si pornim un meci - un singur meci activ in acelasi timp
-vedem in timp real evolutia meciului
-un admin vede o lista cu toate meciurile
-un utilizator normal vede doar meciurile lui
-avem status pe masa de fussball ( cate goluri a dat fiecare parte), sau daca masa este ocupata
+Ne conectam la un lobby, cu un username
+gasim alti utilizatori conectati
+alegem un utilizator conectat si pornim un meci -
+ - un meci pornit va genera random goluri din x in x secunde pentru una dintre echipe, unde x poate fi variabil, de la 1 la 5 secunde
+ - functionalitatea de meciuri va fi implementata intr-un serviciu specializat iar comunicatia se va face peste MQTT
+vedem in timp real evolutia scorului meciurilor, in loby, iar un meci este considerat incheiat cand prima echipa ajunge la 10 goluri
+un admin vede o lista cu toate meciurile incheiate
+un utilizator normal vede doar meciurile lui incheiata
+avem status pe masa de fussball ( cate goluri a dat fiecare echipa), sau daca masa este libera.
 
+4. adaugam posibilitarea de a rula mai multe meciuri in paralel
 
-1. web app
-- websockets pentru afisare informatii
-- start match - un bot
-- goal event
-- stop event
-- informatii in timp real despre match
-    - punem mesage pe un topic de ws  legate de statusul meciului / schimbarile de scor
+5. adaugam Breach protection pe toate serviciile
 
+6. log authentication(success and fail) events in all services
+==============Startup  repos========================
 
+https://github.com/vborcea/websocket_init
 
+https://github.com/vborcea/oauth_init
 
+==============Key generation========================
 
+keytool -genkeypair -alias testalias  -keyalg RSA  -keypass password -keystore key.jks -storepass password
 
-
-
-
-
-
-
-
-
+Export public key
+keytool -list -rfc --keystore key.jks | openssl x509 -inform pem -pubkey
 
 
 
@@ -48,33 +58,9 @@ avem status pe masa de fussball ( cate goluri a dat fiecare parte), sau daca mas
 
 
 
-- chat-service - websocket
-conectare la lobby (websocket)
-alegere adversar din lista de oameni conectati
-pornire meci - un meci tine pana primul jucator ajunge la 10 goluri sau 1 minut
-/user - role user
-/user/{username}
-
-- match-service - basic auth / JWT / mqtt
-API JWT - expunere lista cu toate meciurile jucate de toti jucatorii - user ADMIn
-API JWT - expunere lista cu toate meciurile jucate de jucatorul curent - user normal
-salvarea meciurilor si deteliile lor in memory pentru a le putea scoate apoi in API
-raportare meci  finalizat si castigator
-API basic auth pentru pornire meciuri
-
-/match_list - user normal
-/match_list/{username} - user admin
 
 
-- sensor-1 - mqtt / JWT
-cron 1
-- random de boolean - true - score goal
-- random de boolean - false - nothing
 
 
-senzori care trimit goluri pe mqtt
-API care sa expuna cate goluri s-au dat in serviciu. acest API trebuie fie apelat cu JWT si poate fi apelat de ADMIN
-JWT API care sa spuna daca senzorul este pornit - admin
-/status
 
 
