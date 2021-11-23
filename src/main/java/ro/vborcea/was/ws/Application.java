@@ -9,7 +9,6 @@ import java.util.Map;
 @SpringBootApplication
 public class Application {
     public static final Map<String,String> WS_MAPPING = new HashMap<>();
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
